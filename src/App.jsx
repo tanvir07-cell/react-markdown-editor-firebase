@@ -19,6 +19,7 @@ const docRef = doc(firestore,'markdowns','1')
 
 const App = () => {
   const [text, setText] = useState('');
+  const [ispending, setIsPending] = useState(false);
 
   console.log(text)
 
@@ -28,11 +29,14 @@ const App = () => {
   };
 
   useEffect(()=>{
+
+    setIsPending(true)
   
      
     onSnapshot(docRef,(doc)=>{
       if(doc.exists()){
         setText(doc.data().markdown)
+        setIsPending(false)
       }
     })
 
@@ -45,6 +49,8 @@ const App = () => {
 
 
   }
+
+  if(ispending) return <div>Loading...🕳</div>
 
   return (
     <div id="editor">

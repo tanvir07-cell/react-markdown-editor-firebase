@@ -19,7 +19,48 @@ html, body {
   left: 0;
   background: #FFF;
 	outline: none;
+   border-top: 4px solid red; /* Top border in red */
+  border-right: 4px solid blue; /* Right border in blue */
+  border-bottom: 4px solid green; /* Bottom border in green */
+  border-left: 4px solid yellow; /* Left border in yellow */
+  animation: border 2s linear;
+  
+
 }
+
+@keyframes border {
+  0% {
+    border-top-color: red;
+    border-right-color: blue;
+    border-bottom-color: green;
+    border-left-color: yellow;
+  }
+  25% {
+    border-top-color: yellow;
+    border-right-color: red;
+    border-bottom-color: blue;
+    border-left-color: green;
+  }
+  50% {
+    border-top-color: green;
+    border-right-color: yellow;
+    border-bottom-color: red;
+    border-left-color: blue;
+  }
+  75% {
+    border-top-color: blue;
+    border-right-color: green;
+    border-bottom-color: yellow;
+    border-left-color: red;
+  }
+  100% {
+    border-top-color: red;
+    border-right-color: blue;
+    border-bottom-color: green;
+    border-left-color: yellow;
+  }
+}
+
 #out, #code {
   left: 50%;
   height: 75%;
