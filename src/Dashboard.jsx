@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import  { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {initializeApp} from 'firebase/app';
 import {getFirestore,collection,onSnapshot, doc,setDoc} from "firebase/firestore"
-
+import { getAuth } from 'firebase/auth';
 import { config } from './firebase';
 
 const firebaseApp = initializeApp(config.firebase);
+const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 const markdowns = collection(firestore,'markdowns')
 
 
 
-const Header = () => {
+const Dashboard = () => {
     const [mds,setMds] = useState([])
+    const navigate = useNavigate();
+
+
 
     useEffect(()=>{
         // get a snapshot of the markdowns collection
@@ -35,7 +39,11 @@ const Header = () => {
 
     const handleNewMarkdown = () => {
         // add a new document to the markdowns collection
-        const newDoc = setDoc(doc(markdowns),{markdown:'',htmlText:''})
+        let newDoc = doc(markdowns)
+        const setNewDoc = setDoc(newDoc,{markdown:'',htmlText:''})
+        navigate(`/editor/${newDoc.id}`)
+        
+
 
 
     }
@@ -47,7 +55,7 @@ const Header = () => {
     
   return (
     <div>
-        <h1>Markdown Me</h1>
+        <h1>There is total {mds?.length} {mds?.length<=1 ? "editor":"editors"}</h1>
         {mds.map(md=>{
             return <div key={md.id}>
                 <Link to={`/editor/${md.id}`}>{md.id}</Link>
@@ -72,5 +80,5 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Dashboard
 

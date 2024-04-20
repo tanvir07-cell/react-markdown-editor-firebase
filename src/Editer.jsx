@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import snarkdown from 'snarkdown';
 import {initializeApp} from 'firebase/app';
 import {getFirestore,collection,onSnapshot, doc,setDoc} from "firebase/firestore"
-import { Routes,Route, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 
 import { config } from './firebase';
 
@@ -16,7 +16,7 @@ const markdowns = collection(firestore,'markdowns')
 
 
 const Editer = () => {
-      const [text, setText] = useState('');
+  const [text, setText] = useState('');
   const [ispending, setIsPending] = useState(false);
   const {id} = useParams()
 
@@ -48,7 +48,9 @@ const Editer = () => {
 
   function handleChange(e){
     setText(e.target.value)
+
     // update the document with the new markdown
+    // this setDoc triggers the onSnapshot function on the useEffect
     setDoc(docRef,{markdown:e.target.value,htmlText:snarkdown(e.target.value)})
     
 
