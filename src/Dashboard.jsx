@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import {initializeApp} from 'firebase/app';
 import {getFirestore,collection,onSnapshot, doc,setDoc} from "firebase/firestore"
 import { getAuth } from 'firebase/auth';
-import { config } from './firebase';
+import { config } from './config';
 
 const firebaseApp = initializeApp(config.firebase);
 const auth = getAuth(firebaseApp);
@@ -39,9 +39,13 @@ const Dashboard = () => {
 
     const handleNewMarkdown = () => {
         // add a new document to the markdowns collection
+        // this newDoc is the reference to the new document
         let newDoc = doc(markdowns)
+
+        // set the new document with an empty markdown and htmlText
         const setNewDoc = setDoc(newDoc,{markdown:'',htmlText:''})
         navigate(`/editor/${newDoc.id}`)
+
         
 
 

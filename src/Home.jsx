@@ -1,12 +1,10 @@
-import {initializeApp} from 'firebase/app';
-import {getAuth, signInAnonymously} from "firebase/auth"
-import { config } from './firebase';
+import {signInAnonymously} from "firebase/auth"
 import { useNavigate } from 'react-router-dom';
+import {firebaseInit} from "./firebase";
 
 
-const firebaseApp = initializeApp(config.firebase);
+const {auth} = firebaseInit();
 
-const auth = getAuth(firebaseApp);
 
 
 

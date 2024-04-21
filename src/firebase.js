@@ -1,12 +1,20 @@
+import {initializeApp} from "firebase/app"
+import {getFirestore,connectFirestoreEmulator} from "firebase/firestore"
+import { getAuth,connectAuthEmulator } from "firebase/auth"
+import {config} from "./config"
 
-export const config = {
-    firebase: {
-        apiKey: "AIzaSyAHck429_K-zRDJ_SMo0qLVvsEf6pYImBI",
-        authDomain: "markdown-me-9a12f.firebaseapp.com",
-        projectId: "markdown-me-9a12f",
-        storageBucket: "markdown-me-9a12f.appspot.com",
-        messagingSenderId: "322941870788",
-        appId: "1:322941870788:web:ee5bc19f86e8e2fa101f91"
+
+export function firebaseInit(){
+    const firebaseApp = initializeApp(config.firebase)
+    const firestore = getFirestore(firebaseApp)
+    const auth = getAuth(firebaseApp)
+
+    if(window.location.hostname === "localhost"){
+        connectFirestoreEmulator(firestore,"localhost",8080)
+        connectAuthEmulator(auth,"http://localhost:9099",{disableWarnings:true})
     }
 
+    return {firebaseApp,firestore,auth}
 }
+
+

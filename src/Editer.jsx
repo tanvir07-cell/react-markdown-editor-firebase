@@ -4,7 +4,7 @@ import {initializeApp} from 'firebase/app';
 import {getFirestore,collection,onSnapshot, doc,setDoc} from "firebase/firestore"
 import {  useParams } from 'react-router-dom';
 
-import { config } from './firebase';
+import { config } from './config';
 
 const firebaseApp = initializeApp(config.firebase);
 const firestore = getFirestore(firebaseApp);
